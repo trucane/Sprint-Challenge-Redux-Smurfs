@@ -48,4 +48,13 @@ export const deleteSmurfs = (id) => dispatch =>{
   .catch(err => console.log(err.response))
 }
 
+export const updateSmurf = (id,smurf) => dispatch =>{
+  dispatch({type: FETCH_DATA_START})
+  axios.put(`http://localhost:3333/smurfs/${id}`, smurf)
+  .then(res =>{
+    dispatch({type:FETCH_DATA_SUCCESS, payload: res.data})
+  })
+  .catch(err => console.log(err))
+}
+ 
 

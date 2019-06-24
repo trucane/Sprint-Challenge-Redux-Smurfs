@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getSmurfs, addSmurf, deleteSmurfs } from "../actions";
-import {Link} from 'react-router-dom';
 import "./App.css";
+import SmurfBody from './SmurfBody';
 
 import { connect } from "react-redux";
 /*
@@ -48,6 +48,7 @@ class SmurfList extends Component {
   componentDidMount() {
     this.props.getSmurfs();
   }
+  
   render() {
     return (
       <div className="App">
@@ -81,11 +82,7 @@ class SmurfList extends Component {
           {this.props.smurfs.map(smurf => (
 
             <div key={smurf.id} className="smurf-container">
-              <div className="smurfs">
-                <Link to={`/smurfs/${smurf.id}`}> {smurf.name} </Link>
-              </div>
-            <span onClick={(e) => this.deleteSmurf(e, smurf.id)}>x</span>
-            <Link to={`/smurfs/${smurf.id}/edit`}> edit</Link>
+               <SmurfBody smurf={smurf} delete={this.deleteSmurf} />
             </div>
           ))}
         </div>
