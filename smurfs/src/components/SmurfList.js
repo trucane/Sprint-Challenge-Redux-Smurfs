@@ -25,21 +25,6 @@ class SmurfList extends Component {
     })
   }
 
-  addSmurf = (e) =>{
-    e.preventDefault()
-    const newSmurf = {
-      name:this.state.name.trim(),
-      age:this.state.age.trim(),
-      height:this.state.height.trim()
-    }
-    if(!newSmurf.name || !newSmurf.age || !newSmurf.height){
-
-    }else{
-
-      this.props.addSmurf(newSmurf);
-    }
-  }
-
   deleteSmurf = (e, id) =>{
     e.preventDefault();
     this.props.deleteSmurfs(id);
@@ -52,33 +37,9 @@ class SmurfList extends Component {
   render() {
     return (
       <div className="App">
-        <form onSubmit={this.addSmurf}>
-          <input
-            name="name"
-            type="text"
-            value={this.state.name}
-            placeholder="name"
-            onChange={this.changeHandler}
-          />
-
-          <input
-            name="age"
-            type="text"
-            value={this.state.age}
-            placeholder="age"
-            onChange={this.changeHandler}
-          />
-
-          <input
-            name="height"
-            type="text"
-            value={this.state.height}
-            placeholder="height"
-            onChange={this.changeHandler}
-          />
-          <button>Add Smurf</button>
-        </form>
+        <h2> {this.props.smurfs.length} Smurfs in village</h2>
         <div className="smurf-village">
+
           {this.props.smurfs.map(smurf => (
 
             <div key={smurf.id} className="smurf-container">
