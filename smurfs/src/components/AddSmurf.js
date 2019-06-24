@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {addSmurf} from "../actions";
+import {getSmurfs,addSmurf} from "../actions";
 import "./App.css";
 
 import { connect } from "react-redux";
@@ -24,18 +24,27 @@ class AddSmurf extends Component {
     })
   }
 
+  componentDidMount(){
+      this.props.getSmurfs();
+  }
+
   addSmurf = (e) =>{
     e.preventDefault()
-    const newSmurf = {
-      name:this.state.name.trim(),
-      age:this.state.age.trim(),
-      height:this.state.height.trim()
-    }
-    if(!newSmurf.name || !newSmurf.age || !newSmurf.height){
-
+    const check = this.props.smurfs.find(item => `${item.name}` === this.state.name)
+    if(!check){
+        const newSmurf = {
+            name:this.state.name.trim(),
+            age:this.state.age.trim(),
+            height:this.state.height.trim()
+        }
+        if(!newSmurf.name || !newSmurf.age || !newSmurf.height){
+    
+        }else{
+    
+          this.props.addSmurf(newSmurf);
+        }
     }else{
-
-      this.props.addSmurf(newSmurf);
+        console.log('that smurf is already here')
     }
   }
   
@@ -79,5 +88,5 @@ const mapStateToProps = ({ smurfs }) => ({
 
 export default connect(
   mapStateToProps,
-  {addSmurf}
+  {addSmurf, getSmurfs}
 )(AddSmurf);
